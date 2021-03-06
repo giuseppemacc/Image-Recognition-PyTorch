@@ -8,7 +8,7 @@ from ImageRecognition import getPattern, ImageRecognition
 
 if __name__ == "__main__":
 
-    image_path = "test.jpg" 
+    image_path = "test0.jpg" 
 
     img = ImageOps.grayscale(Image.open(image_path).resize((50,50)))
     np_img = np.array(img)
