@@ -40,8 +40,6 @@ class DataSet():
                 if "jpg" in f:
                     try:
                         path = os.path.join(label, f)
-                        # img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-                        # img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
                         img = ImageOps.grayscale(Image.open(path).resize((IMG_SIZE,IMG_SIZE)))
                         self.training_data.append([np.array(img), np.eye(2)[self.LABELS[label]]])
 
@@ -92,7 +90,7 @@ def train(model, training_dataset):
     X = (torch.Tensor([i[0] for i in training_dataset]).view(-1,50,50))/255
     y = torch.Tensor([i[1] for i in training_dataset])
 
-    # TODO: aggiungere qualcosa per modificare il train set a ogni epoch
+    # TODO: add something to change the train set at each epoch
     train_X = X 
     train_y = y
 
@@ -109,7 +107,7 @@ def train(model, training_dataset):
             outputs = model(batch_X)
             loss = loss_function(outputs, batch_y)
             loss.backward()
-            optimizer.step()    # Does the update
+            optimizer.step()   
 
         print(f"Epoch: {epoch}. Loss: {loss}")
     
